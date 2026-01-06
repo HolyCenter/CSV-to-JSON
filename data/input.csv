@@ -1,0 +1,5 @@
+id,full_name,email,city
+1,  Max   Mustermann  ,MAX@EXAMPLE.COM, Berlin
+2,Erika Mustermann, erika@example.com ,Hamburg
+3,,no_name@example.com,München
+4,John Doe,invalid-email, 
