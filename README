@@ -1,16 +1,20 @@
 # CSV to JSON Converter
+
 Takes a CSV file with an id, a name, an e-mail and a city, normalizes it, 
 creates a slug based on the name and writes it into a JSON-file. Empty names, e-mails and cities, 
 as well as e-mails without an "@" are written as null. 
 
 ## Setup
-```bash
+
+```powershell
 python -m venv .venv
-source .venv/Scripts/activate
-pip install -r requirements.txt
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
 
 ## Usage
+
 python -m src.convert
 
 ## Output
+
 out/output.json
