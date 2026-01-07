@@ -2,6 +2,7 @@ import csv
 import json
 import re
 import pathlib
+import argparse
 
 def normalize_spaces(s):
     if s is None: 
@@ -9,9 +10,9 @@ def normalize_spaces(s):
     return " ".join(s.strip().split())
 
 def normalize_emails(s):
-    if "@" not in s: 
-        return None
     if s is None:
+        return None
+    if "@" not in s: 
         return None
     return s.lower().strip()
 
@@ -30,10 +31,19 @@ def row_to_record(row):
     }
 
 def convert_csv_to_json(in_path, out_path):
-    with open(in_path, "r", newline="") as f:
+    with open(in_path, "r", newline="", encoding="utf-8") as f:
         rows = csv.DictReader(f)
         rows_to_json = [row_to_record(row) for row in rows]
-        with open(out_path, "w") as j:
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(out_path, "w", encoding="utf-8") as j:
             json.dump(rows_to_json, j, ensure_ascii=False, indent=2)
 
-convert_csv_to_json(pathlib.Path("data/input.csv"),pathlib.Path("out/output.json"))
+def main():
+    parser = argparse.ArgumentParser(description="Take an input-csv and create a clean output-json.")
+    parser.add_argument("--input", type=pathlib.Path, required=True)
+    parser.add_argument("--output", type=pathlib.Path, required=True)
+    args = parser.parse_args()
+    convert_csv_to_json(args.input, args.output)
+
+if __name__ == "__main__":
+    main()
