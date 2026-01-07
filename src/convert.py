@@ -5,7 +5,7 @@ import pathlib
 import argparse
 
 def normalize_spaces(s):
-    if s is None: 
+    if s is None or s == "": 
         return None
     return " ".join(s.strip().split())
 
@@ -17,7 +17,7 @@ def normalize_emails(s):
     return s.lower().strip()
 
 def slugify(name):
-    if name is None:
+    if name is None or name=="":
         return None
     return "".join(re.findall("[a-z0-9-]", "-".join(name.lower().strip().split())))
 
